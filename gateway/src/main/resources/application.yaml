@@ -1,0 +1,9 @@
+server:
+  port: 9000
+  forward-headers-strategy: framework
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  config:
+    import: optional:configserver:http://localhost:9296
