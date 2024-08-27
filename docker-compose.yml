@@ -1,15 +1,14 @@
-
 services:
   eureka-server:
-     container_name: eureka-server
-     platform: linux/amd64
-     build:
-       context: ./eureka-discovery-server
-       dockerfile: Dockerfile
-     ports:
-       - '8888:8761'
-     networks:
-       - app-network
+    container_name: eureka-server
+    platform: linux/amd64
+    build:
+      context: ./eureka-discovery-server
+      dockerfile: Dockerfile
+    ports:
+      - '8888:8761'
+    networks:
+      - app-network
 
 
   config-server:
@@ -26,6 +25,24 @@ services:
       - app-network
     environment:
       - EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
+  
+  api-gateway:
+    container_name: api-gateway
+    platform: linux/amd64
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - '8080:9000'
+    depends_on:
+      - config-server
+      - eureka-server
+    networks:
+      - app-network
+    environment:
+      - CONFIG_SERVER_URL=http://config-server:9296
+      - EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
+      - ACCESS_TOKEN_SECRET_KEY:YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==
 
 
   postgres_auth:

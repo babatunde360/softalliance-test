@@ -1,9 +1,18 @@
 server:
   port: 9000
   forward-headers-strategy: framework
+
 spring:
   devtools:
     livereload:
       enabled: true
   config:
-    import: optional:configserver:http://localhost:9296
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:9296}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+
+jwt:
+  accessTokenSecretKey: ${ACCESS_TOKEN_SECRET_KEY:YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==}
