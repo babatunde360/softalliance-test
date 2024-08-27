@@ -43,6 +43,32 @@ services:
       - CONFIG_SERVER_URL=http://config-server:9296
       - EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
       - ACCESS_TOKEN_SECRET_KEY:YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==
+  
+  
+  auth-service:
+    container_name: auth-service
+    # image: auth-servicev
+    platform: linux/amd64
+    build:
+      context: ./authentication-service
+      dockerfile: Dockerfile
+    ports:
+      - '9002:9002'
+    depends_on:
+      - eureka-server
+      - config-server
+      - postgres_auth
+      - api-gateway
+    environment:
+      - CONFIG_SERVER_URL=http://config-server:9296
+      - EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
+      - ACCESS_TOKEN_SECRET_KEY:YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_auth:5432/auth_db
+      - SPRING_DATASOURCE_USERNAME=auth_user
+      - SPRING_DATASOURCE_PASSWORD=auth_password
+      
+    networks:
+      - app-network
 
 
   postgres_auth:
@@ -56,8 +82,8 @@ services:
       - auth_db_data:/var/lib/postgresql/data
     ports:
       - "5433:5432"
-    # networks:
-    #   - app-network
+    networks:
+     - app-network
 
 
   postgres_employee:

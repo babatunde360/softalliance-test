@@ -1,0 +1,30 @@
+server:
+  port: 9002
+  forward-headers-strategy: framework
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+
+  devtools:
+    livereload:
+      enabled: true
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:9296}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+
+jwt:
+  accessTokenValiditySeconds: 20000
+  accessTokenSecretKey: YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==
+  refreshTokenValiditySeconds: 164000
+  refreshTokenSecretKey: YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==
