@@ -1,0 +1,38 @@
+
+services:
+
+  postgres_auth:
+    image: postgres
+    container_name: postgres_auth
+    environment:
+      POSTGRES_USER: auth_user
+      POSTGRES_PASSWORD: auth_password
+      POSTGRES_DB: auth_db
+    volumes:
+      - auth_db_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    # networks:
+    #   - app-network
+
+
+  postgres_employee:
+    image: postgres
+    container_name: postgres_employee
+    environment:
+      POSTGRES_USER: employee_user
+      POSTGRES_PASSWORD: employee_password
+      POSTGRES_DB: employee_db
+    volumes:
+      - employee_db_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+volumes:
+  auth_db_data:
+  employee_db_data:
+
+
+networks:
+  app-network:
+    driver: bridge
