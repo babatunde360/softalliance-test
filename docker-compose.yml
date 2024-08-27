@@ -1,5 +1,14 @@
 
 services:
+  eureka-server:
+     container_name: eureka-server
+     platform: linux/amd64
+     build:
+       context: ./eureka-discovery-server
+       dockerfile: Dockerfile
+     ports:
+       - '8888:8761'
+
 
   postgres_auth:
     image: postgres
