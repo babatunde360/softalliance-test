@@ -11,4 +11,10 @@ spring:
           clone-on-start: true
 #          Uncomment the following lines to enable authentication add your username and git token
 #            username:
-#            password: 
+#            password:
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_URL:http://eureka-server:8761/eureka/}
+  instance:
+    preferIpAddress: true

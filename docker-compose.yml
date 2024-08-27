@@ -8,6 +8,24 @@ services:
        dockerfile: Dockerfile
      ports:
        - '8888:8761'
+     networks:
+       - app-network
+
+
+  config-server:
+    container_name: config-server
+    platform: linux/amd64
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    ports:
+      - '9296:9296'
+    depends_on:
+      - eureka-server
+    networks:
+      - app-network
+    environment:
+      - EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
 
 
   postgres_auth:
