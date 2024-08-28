@@ -72,6 +72,12 @@ while the schema for the `authentication-service` is located in the `src/main/re
     docker-compose down
    ```
 
+## To view the config file on git
+
+```{bash}
+    https://github.com/babatunde360/softalliance-config-server
+   ```
+
 ## Go to this endpoint on your browser to view the swagger docs
 
 ### Authentication-Service:
