@@ -79,6 +79,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public EmployeeDTO update(Long id, EmployeeUpdateJSON updateJSON) {
+        log.debug("Updating employee with id: {}", id);
 
         if (updateJSON.getEmail() == null && updateJSON.getDepartmentId() == null) {
             throw new ApiBadRequestException("Email or Department ID must be provided");
@@ -87,6 +88,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee employee = repository.findById(id)
                 .orElseThrow(() -> new ApiResourceNotFoundException(EMPLOYEE_NOT_FOUND));
+
+        userUpdateJSON.username(employee.getEmail());
 
         if (updateJSON.getEmail() != null) {
             employee.setEmail(updateJSON.getEmail());
@@ -102,7 +105,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             userUpdateJSON.role(updateJSON.getRole());
         }
 
-        if (!authService.updateUser(userUpdateJSON.build())) {
+        UserUpdateJSON builtUser = userUpdateJSON.build();
+        if (!authService.updateUser(builtUser)) {
             throw new ApiInternalServerException("User update failed");
         }
 

@@ -15,7 +15,7 @@ public class EmployeeDTOMapper implements Function<Employee, EmployeeDTO> {
                 .lastName(employee.getLastName())
                 .email(employee.getEmail())
                 .departmentName(employee.getDepartment() != null ?
-                        employee.getDepartment().getName() : null)
+                        employee.getDepartment().getName().toUpperCase() : null)
                 .build();
     }
 }
