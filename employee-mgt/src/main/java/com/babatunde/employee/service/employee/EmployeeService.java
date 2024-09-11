@@ -1,6 +1,5 @@
 package com.babatunde.employee.service.employee;
 
-import com.babatunde.employee.model.employee.Employee;
 import com.babatunde.employee.model.employee.request.EmployeeCreationJSON;
 import com.babatunde.employee.model.employee.request.EmployeeUpdateJSON;
 import com.babatunde.employee.model.employee.response.EmployeeDTO;
@@ -21,7 +20,7 @@ public interface EmployeeService {
 
     List<EmployeeDTO> findByDepartmentId(Long departmentId);
 
-    Employee feignFindById(Long id);
+    EmployeeDTO feignFindById(Long id);
 
     boolean findByEmail(String mail);
 }

@@ -1,6 +1,6 @@
 package com.babatunde.employee.controller.employee;
 
-import com.babatunde.employee.model.employee.Employee;
+import com.babatunde.employee.model.employee.response.EmployeeDTO;
 import com.babatunde.employee.service.employee.EmployeeService;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class FeignEmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping("/{id}")
-    public Employee getEmployeeByEmail(@PathVariable Long id) {
+    public EmployeeDTO getEmployeeByEmail(@PathVariable Long id) {
         return employeeService.feignFindById(id);
     }
 

@@ -6,6 +6,7 @@ import com.babatunde.employee.model.department.request.DepartmentUpdateJSON;
 import com.babatunde.employee.model.department.response.DepartmentDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DepartmentService {
 
@@ -14,6 +15,8 @@ public interface DepartmentService {
 
     //     findAll
     List<DepartmentDTO> findAll();
+
+    Optional<DepartmentDTO> findByName(String name);
 
     //   service update
     DepartmentDTO update(Long id, DepartmentUpdateJSON updateJSON);

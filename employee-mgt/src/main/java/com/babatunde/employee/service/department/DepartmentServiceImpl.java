@@ -13,10 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-
-import static java.util.Collections.emptyList;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -58,6 +56,12 @@ public class DepartmentServiceImpl implements DepartmentService {
                     .toList();
         }
         return List.of();
+    }
+
+    @Override
+    public Optional<DepartmentDTO> findByName(String name) {
+        return repository.findByName(name)
+                .map(mapper);
     }
 
     @Override

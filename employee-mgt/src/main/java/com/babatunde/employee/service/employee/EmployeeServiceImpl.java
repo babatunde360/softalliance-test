@@ -84,7 +84,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new ApiBadRequestException("Email or Department ID must be provided");
         }
         UserUpdateJSON.UserUpdateJSONBuilder userUpdateJSON = UserUpdateJSON.builder();
-        Department department = departmentService.internalFindByID(updateJSON.getDepartmentId());
 
         Employee employee = repository.findById(id)
                 .orElseThrow(() -> new ApiResourceNotFoundException(EMPLOYEE_NOT_FOUND));
@@ -95,6 +94,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         if (updateJSON.getDepartmentId() != null) {
+            Department department = departmentService.internalFindByID(updateJSON.getDepartmentId());
             employee.setDepartment(department);
         }
 
@@ -144,8 +144,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee feignFindById(Long id) {
+    public EmployeeDTO feignFindById(Long id) {
         return repository.findById(id)
+                .map(mapper)
                 .orElseThrow(() -> new ApiResourceNotFoundException(EMPLOYEE_NOT_FOUND));
     }
 
