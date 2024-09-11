@@ -42,7 +42,7 @@ services:
     environment:
       - CONFIG_SERVER_URL=http://config-server:9296
       - EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
-      - ACCESS_TOKEN_SECRET_KEY:YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==
+      - ACCESS_TOKEN_SECRET_KEY=YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==
   
   
   auth-service:
@@ -62,10 +62,10 @@ services:
     environment:
       - CONFIG_SERVER_URL=http://config-server:9296
       - EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
-      - ACCESS_TOKEN_SECRET_KEY:YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==
-      - ACCESS_TOKEN_VALIDITY_SECONDS=3600
-      - REFRESH_TOKEN_SECRET_KEY:YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==
-      - REFRESH_TOKEN_VALIDITY_SECONDS=164000
+      - ACCESS_TOKEN_SECRET_KEY=YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==
+      - ACCESS_TOKEN_VALIDITY_SECONDS=600
+      - REFRESH_TOKEN_SECRET_KEY=YwhN/Oo6+w7hY7OzlUcCsJHlDU92nLkIHKXOAdYfjEZ6R1u6gp0ZNMztUjNHtI7v4SHfvwMzk/JCKnVvd65C0w==
+      - REFRESH_TOKEN_VALIDITY_SECONDS=1640
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_auth:5432/auth_db
       - SPRING_DATASOURCE_USERNAME=auth_user
       - SPRING_DATASOURCE_PASSWORD=auth_password
