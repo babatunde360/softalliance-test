@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
                 .firstName(employee.getFirstName())
                 .lastName(employee.getLastName())
                 .role(user.getRole().toString())
-                .department(employee.getDepartment())
+                .department(employee.getDepartmentName())
                 .phoneNumber(employee.getPhoneNumber())
                 .build();
     }

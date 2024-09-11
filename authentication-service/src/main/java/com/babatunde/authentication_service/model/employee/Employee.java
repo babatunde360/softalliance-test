@@ -14,6 +14,6 @@ public class Employee {
     String email;
     String firstName;
     String lastName;
-    String department;
+    String departmentName;
     String phoneNumber;
 }
