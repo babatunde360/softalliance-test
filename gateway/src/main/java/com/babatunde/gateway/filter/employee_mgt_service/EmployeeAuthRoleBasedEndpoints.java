@@ -19,6 +19,7 @@ public class EmployeeAuthRoleBasedEndpoints {
 
     public static final String BASE_DEPARTMENT_PATH = "/api/v1/departments";
     public static final String BASE_EMPLOYEE_PATH = "/api/v1/employees";
+    public static final String ID_REGEX = "/([^/]+)";
     static final List<Endpoint> roleEndpoints = new ArrayList<>(List.of(
             //Authenticated Air Cargo Controller
             new Endpoint(BASE_DEPARTMENT_PATH,
@@ -31,11 +32,13 @@ public class EmployeeAuthRoleBasedEndpoints {
             ),
             new Endpoint(BASE_DEPARTMENT_PATH,
                     HttpMethod.PUT,
-                    Collections.singletonList(Role.ADMIN.toString())
+                    Collections.singletonList(Role.ADMIN.toString()),
+                    BASE_DEPARTMENT_PATH + ID_REGEX
             ),
             new Endpoint(BASE_DEPARTMENT_PATH,
                     HttpMethod.DELETE,
-                    Collections.singletonList(Role.ADMIN.toString())
+                    Collections.singletonList(Role.ADMIN.toString()),
+                    BASE_DEPARTMENT_PATH + ID_REGEX
             ),
             new Endpoint(BASE_EMPLOYEE_PATH,
                     HttpMethod.GET,
@@ -47,15 +50,22 @@ public class EmployeeAuthRoleBasedEndpoints {
             ),
             new Endpoint(BASE_EMPLOYEE_PATH,
                     HttpMethod.PUT,
-                    Collections.singletonList(Role.ADMIN.toString())
+                    Collections.singletonList(Role.ADMIN.toString()),
+                    BASE_EMPLOYEE_PATH + ID_REGEX
             ),
             new Endpoint(BASE_EMPLOYEE_PATH,
                     HttpMethod.DELETE,
-                    Collections.singletonList(Role.ADMIN.toString())
+                    Collections.singletonList(Role.ADMIN.toString()),
+                    BASE_EMPLOYEE_PATH + ID_REGEX
             ),
-            new Endpoint(BASE_EMPLOYEE_PATH + "/{id}",
+            new Endpoint(BASE_EMPLOYEE_PATH,
                     HttpMethod.GET,
-                    Arrays.asList(Role.ADMIN.toString(), Role.MANAGER.toString(), Role.USER.toString()))
+                    Arrays.asList(Role.ADMIN.toString(), Role.MANAGER.toString(), Role.USER.toString()),
+                    BASE_EMPLOYEE_PATH + ID_REGEX),
+            new Endpoint(BASE_EMPLOYEE_PATH,
+                    HttpMethod.GET,
+                    Collections.singletonList(Role.ADMIN.toString()),
+                    BASE_EMPLOYEE_PATH + "/department" + ID_REGEX)
     ));
 
 }
